@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101522">
-  <title>Juego 2 | Speed games</title>
+  <title>Tetris | Speed games</title>
   <link rel="stylesheet" href="../../styles.css">
-  <link rel="stylesheet" href="game.css">
-  <script src="game.js" defer></script>
+  <link rel="stylesheet" href="tetris.css">
+  <script src="tetris.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -20,13 +20,69 @@
   <main class="game-page">
     <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> Volver a los juegos</a>
     <p class="eyebrow">SEGUNDO ESPACIO</p>
-    <h1>Juego 2</h1>
-    <section class="game-stage" aria-label="Área de juego">
-      <div class="stage-message">
-        <span class="stage-symbol" aria-hidden="true">＋</span>
-        <h2>Tu juego empieza aquí</h2>
-        <p>Agrega la estructura de tu juego en este archivo y personaliza <code>game.css</code> y <code>game.js</code>.</p>
+    <h1>Tetris</h1>
+    <section class="game-stage tetris-shell" aria-label="Juego de Tetris">
+      <div class="tetris-layout">
+        <aside class="game-panel game-panel--left" aria-label="Estadisticas">
+          <div class="stat-card">
+            <span>PUNTOS</span>
+            <strong id="score">00000</strong>
+          </div>
+          <div class="stat-card">
+            <span>LÍNEAS</span>
+            <strong id="lines">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>NIVEL</span>
+            <strong id="level">1</strong>
+          </div>
+          <div class="stat-card">
+            <span>CIUDAD</span>
+            <strong id="city-progress">0/10</strong>
+          </div>
+        </aside>
+
+        <div class="board-wrap">
+          <canvas id="tetris-board" width="300" height="600" aria-label="Tablero de Tetris"></canvas>
+          <div id="game-overlay" class="game-overlay">
+            <div class="overlay-card">
+              <span class="overlay-symbol" aria-hidden="true">▦</span>
+              <h2 id="overlay-title">¿Listo?</h2>
+              <p id="overlay-copy">Completa líneas y supera tu récord.</p>
+              <button id="start-button" class="primary-button" type="button">Iniciar partida</button>
+              <div id="countdown" class="countdown" aria-live="assertive" hidden>
+                <span id="countdown-number">3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="game-panel game-panel--right" aria-label="Siguiente pieza y acciones">
+          <div class="next-card">
+            <span>SIGUIENTE</span>
+            <canvas id="next-piece" width="120" height="120" aria-label="Siguiente pieza"></canvas>
+          </div>
+          <button id="pause-button" class="secondary-button" type="button" disabled>Pausar</button>
+          <button id="restart-button" class="secondary-button" type="button" disabled>Reiniciar</button>
+        </aside>
       </div>
+
+      <div class="touch-controls" aria-label="Controles táctiles">
+        <button type="button" data-action="left" aria-label="Mover a la izquierda">←</button>
+        <button type="button" data-action="down" aria-label="Mover hacia abajo">↓</button>
+        <button type="button" data-action="right" aria-label="Mover a la derecha">→</button>
+        <button type="button" data-action="rotate" aria-label="Rotar pieza">↻</button>
+        <button type="button" data-action="drop" aria-label="Caída rápida">⤓</button>
+      </div>
+
+      <p class="keyboard-help">
+        <span>← →</span> Mover
+        <span>↑</span> Rotar
+        <span>↓</span> Bajar
+        <span>Espacio</span> Caída rápida
+        <span>Enter</span> Caída instantánea
+        <span>P</span> Pausar
+      </p>
     </section>
   </main>
   <footer class="site-footer">

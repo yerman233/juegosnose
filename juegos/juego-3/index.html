@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101522">
-  <title>Juego 3 | Speed games</title>
+  <meta name="description" content="Explora laberintos, sube por plataformas y escapa del titán en Lumo: La última carrera.">
+  <title>Lumo: La última carrera | Speed games</title>
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="game.css">
   <script src="game.js" defer></script>
@@ -19,14 +20,87 @@
   </header>
   <main class="game-page">
     <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> Volver a los juegos</a>
-    <p class="eyebrow">TERCER ESPACIO</p>
-    <h1>Juego 3</h1>
-    <section class="game-stage" aria-label="Área de juego">
-      <div class="stage-message">
-        <span class="stage-symbol" aria-hidden="true">＋</span>
-        <h2>Tu juego empieza aquí</h2>
-        <p>Agrega la estructura de tu juego en este archivo y personaliza <code>game.css</code> y <code>game.js</code>.</p>
+    <p class="eyebrow">AVENTURA ARCADE · 3 NIVELES</p>
+    <h1>Lumo: <span>La última carrera</span></h1>
+    <section class="arcade" aria-label="Juego Lumo: La última carrera">
+      <section id="title-screen" class="title-screen" aria-labelledby="title-screen-heading">
+        <div id="title-menu" class="title-menu">
+          <div class="title-copy">
+            <p class="eyebrow">TRES NIVELES · UNA AVENTURA</p>
+            <h2 id="title-screen-heading">Lumo y los espíritus</h2>
+            <p>Explora laberintos, sube por las plataformas y corre por el último pasillo.</p>
+            <div class="menu-actions">
+              <button id="menu-play" class="game-button game-button--primary" type="button">Jugar</button>
+              <button id="menu-continue" class="game-button" type="button" hidden>Continuar</button>
+              <button id="menu-customize" class="game-button" type="button">Personalizar</button>
+            </div>
+            <p id="progress-message" class="progress-message" aria-live="polite"></p>
+          </div>
+          <canvas id="title-art" width="320" height="280" role="img" aria-label="Lumo inclinado se come a un espíritu azul; el espíritu naranja lo acompaña abajo."></canvas>
+        </div>
+        <div id="customize-panel" class="customize-panel" hidden>
+          <div>
+            <p class="eyebrow">TU PERSONAJE</p>
+            <h2>Personaliza a Lumo</h2>
+          </div>
+          <div class="color-options" role="group" aria-label="Color de Lumo">
+            <button type="button" data-lumo-color="#7bec78" aria-pressed="true"><span class="color-swatch swatch-green"></span>Verde original</button>
+            <button type="button" data-lumo-color="#ef5548" aria-pressed="false"><span class="color-swatch swatch-tomato"></span>Rojo tomate</button>
+            <button type="button" data-lumo-color="#32c9c4" aria-pressed="false"><span class="color-swatch swatch-turquoise"></span>Azul turquesa</button>
+            <button type="button" data-lumo-color="#e34ec2" aria-pressed="false"><span class="color-swatch swatch-fuchsia"></span>Fucsia</button>
+          </div>
+          <label class="hat-option"><input id="hat-toggle" type="checkbox" checked> Sombrero negro</label>
+          <button id="customize-back" class="game-button" type="button">Volver al título</button>
+        </div>
+      </section>
+
+      <div id="game-content" class="game-content" hidden>
+        <div class="game-hud" aria-label="Estado de la partida">
+          <div><span class="hud-label">NIVEL</span><strong id="level-value">1 / 3</strong></div>
+          <div><span class="hud-label">PUNTOS</span><strong id="score-value">00000</strong></div>
+          <div><span class="hud-label">VIDAS</span><strong id="lives-value">♥ ♥ ♥ ♥</strong></div>
+          <div class="power-readout"><span class="hud-label">DEFENSA</span><strong id="power-value">LISTO</strong></div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="game-canvas" width="672" height="544" aria-label="Tablero del juego. Pulsa una flecha o WASD para comenzar y moverte.">
+            Tu navegador no admite el lienzo necesario para jugar.
+          </canvas>
+          <div id="runner-failure" class="runner-failure" hidden>
+            <div class="titan-face" role="img" aria-label="Cara enfadada del titán"></div>
+            <h2>GAME OVER</h2>
+            <p>El titán te alcanzó. Tómate un respiro e inténtalo otra vez.</p>
+            <div class="menu-actions">
+              <button id="retry-run" class="game-button game-button--primary" type="button">Reintentar nivel 3</button>
+              <button id="failure-title" class="game-button" type="button">Volver al título</button>
+            </div>
+          </div>
+        </div>
+        <div class="game-toolbar">
+          <p id="game-message" aria-live="polite">Pulsa una flecha o WASD para empezar en esa dirección.</p>
+          <div class="toolbar-buttons">
+            <button id="start-button" class="game-button" type="button">Volver al título</button>
+            <button id="pause-button" class="game-button" type="button" disabled>Pausar</button>
+          </div>
+        </div>
+        <div class="game-help">
+          <p><strong>Mover:</strong> flechas o WASD <span aria-hidden="true">·</span> <strong>Saltar:</strong> ↑, W o espacio <span aria-hidden="true">·</span> <strong>Pausa:</strong> Esc</p>
+          <p>Tienes cuatro vidas. Tras tres pérdidas seguidas recibes un escudo de 30 segundos. Los espíritus salen de la caja central tras 2 segundos; usa los túneles laterales. En móvil, toca una dirección.</p>
+        </div>
+        <div class="touch-controls" aria-label="Controles táctiles">
+          <button type="button" data-dir="up" aria-label="Arriba o saltar">↑</button>
+          <div>
+            <button type="button" data-dir="left" aria-label="Izquierda">←</button>
+            <button type="button" data-dir="down" aria-label="Abajo">↓</button>
+            <button type="button" data-dir="right" aria-label="Derecha">→</button>
+          </div>
+        </div>
       </div>
+      <section id="ending-screen" class="ending-screen" aria-labelledby="ending-heading" hidden>
+        <p class="eyebrow">¡AVENTURA COMPLETADA!</p>
+        <h2 id="ending-heading">Lumo y Luma</h2>
+        <canvas id="ending-art" width="672" height="420" role="img" aria-label="Lumo y Luma celebran juntos en un campo verde con árboles y cielo azul despejado."></canvas>
+        <button id="ending-title" class="game-button game-button--primary" type="button">Volver al título</button>
+      </section>
     </section>
   </main>
   <footer class="site-footer">

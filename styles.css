@@ -168,7 +168,7 @@ h1 span {
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 18px;
 }
 
@@ -283,6 +283,10 @@ h1 span {
 
 .game-card--three .card-icon {
   color: #ff9a76;
+}
+
+.game-card--four .card-icon {
+  color: #75e8ff;
 }
 
 .site-footer {

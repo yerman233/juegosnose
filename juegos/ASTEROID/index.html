@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101522">
+  <meta name="description" content="Sobrevive seis niveles de Asteroid, derrota a los bombarderos y vence al jefe final.">
+  <title>Asteroid | Speed games</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="game.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="Speed games, inicio">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span>Speed <strong>games</strong></span>
+    </a>
+    <span class="header-note">Tu próxima partida empieza aquí</span>
+  </header>
+
+  <main class="game-page">
+    <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> Volver a los juegos</a>
+    <p class="eyebrow">CAMPAÑA · 6 NIVELES</p>
+    <h1>Asteroid</h1>
+
+    <section class="game-stage asteroid-stage" aria-label="Juego Asteroid">
+      <div class="game-hud" aria-label="Estado de la partida">
+        <div><span>PUNTOS</span><strong id="score-value">00000</strong></div>
+        <div><span>NIVEL</span><strong id="level-value">1 / 6</strong></div>
+        <div><span>NAVES</span><strong id="lives-value">3</strong></div>
+        <div id="weapon-hud" hidden><span>RAYO</span><strong id="weapon-value">8s</strong></div>
+      </div>
+
+      <div class="arena-shell">
+        <canvas id="game-canvas" tabindex="0" aria-label="Área de juego. Usa W y las flechas para pilotar, A y D para girar y espacio para disparar.">
+          Tu navegador no admite el elemento canvas.
+        </canvas>
+        <span class="screen-reader-only" id="player-health-status" role="progressbar" aria-label="Integridad de la nave" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">100%</span>
+        <div class="game-overlay" id="game-overlay">
+          <div class="overlay-content">
+            <p class="eyebrow" id="overlay-eyebrow">CAMPAÑA DE SUPERVIVENCIA</p>
+            <h2 id="overlay-title">La órbita te necesita</h2>
+            <p id="overlay-copy">Supera seis niveles: combate naves enemigas desde el segundo, esquiva bombarderos y derrota al jefe final.</p>
+            <button class="arcade-button" id="start-button" type="button">Iniciar misión <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+        <div class="boss-hud" id="boss-hud" hidden>
+          <span id="boss-label">JEFE</span>
+          <div class="boss-health-track" role="progressbar" aria-label="Vida del jefe" aria-valuemin="0" aria-valuemax="18" aria-valuenow="18">
+            <span id="boss-health-fill"></span>
+          </div>
+        </div>
+        <div class="arena-brand" aria-label="Speed games">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>Speed <strong>games</strong></span>
+        </div>
+      </div>
+
+      <div class="game-tools">
+        <button class="how-to-play-button" id="how-to-play-button" type="button" aria-expanded="false" aria-controls="game-instructions">Cómo jugar</button>
+      </div>
+      <section class="instructions-panel" id="game-instructions" aria-labelledby="instructions-title" hidden>
+        <h2 id="instructions-title">Controles y objetivo</h2>
+        <ul>
+          <li><kbd>W</kbd> o <kbd>↑</kbd>: impulsa la nave hacia donde apunta.</li>
+          <li><kbd>A</kbd>/<kbd>←</kbd> y <kbd>D</kbd>/<kbd>→</kbd>: gira para apuntar y maniobrar.</li>
+          <li><kbd>Espacio</kbd>: dispara; puedes mantenerlo pulsado.</li>
+          <li>En móvil, mantén pulsados los botones de girar, avanzar y disparar.</li>
+          <li>La barra luminosa dentro de la nave indica su integridad. Al agotarse, pierdes una nave y reapareces con la barra llena.</li>
+          <li>Destruye todos los asteroides y las naves enemigas para pasar de nivel. Los bordes de la arena se conectan.</li>
+          <li>Las naves enemigas aparecen desde el nivel 2. En los niveles 4 y 5 acompaña al bombardero un grupo de cazas.</li>
+          <li>El bombardero lanza bombas explosivas que rebotan en los bordes y estallan cerca de tu nave.</li>
+          <li>Al destruir un bombardero aparece un potenciador durante 5 segundos. Recógelo para disparar un rayo durante 8 segundos.</li>
+          <li>Mientras tengas el rayo, mantén pulsado disparar para sostener un haz continuo. Los demás disparos rebotan en los bordes de la arena.</li>
+          <li>El jefe final envía refuerzos: elimina todas las naves pequeñas para desactivar su escudo y poder dañarlo.</li>
+          <li>El nivel 6 es el enfrentamiento final contra el jefe.</li>
+        </ul>
+      </section>
+
+      <div class="game-controls" aria-label="Controles táctiles">
+        <button type="button" data-action="left" aria-label="Girar a la izquierda">↶</button>
+        <button type="button" data-action="forward" aria-label="Avanzar">▲</button>
+        <button type="button" data-action="right" aria-label="Girar a la derecha">↷</button>
+        <button type="button" data-action="shoot" aria-label="Disparar">DISPARAR</button>
+      </div>
+      <p class="controls-hint">W / ↑ avanzar <span>·</span> A / ← y D / → girar <span>·</span> Espacio disparar</p>
+      <p class="screen-reader-only" id="game-announcement" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Speed games</span>
+    <span>Hecho para jugar en equipo <span aria-hidden="true">✳</span></span>
+  </footer>
+</body>
+</html>

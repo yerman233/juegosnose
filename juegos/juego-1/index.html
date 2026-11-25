@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101522">
-  <title>Juego 1 | Speed games</title>
+  <meta name="description" content="Explora mundos procedurales sin fin y elige tu personaje en Lumbre del Valle, un RPG original de Speed games.">
+  <title>Lumbre del Valle | Speed games</title>
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="game.css">
   <script src="game.js" defer></script>
 </head>
-<body>
+<body class="game-theme-blue">
   <header class="site-header">
     <a class="brand" href="../../index.html" aria-label="Speed games, inicio">
       <span class="brand-mark" aria-hidden="true">S</span>
@@ -17,18 +18,357 @@
     </a>
     <span class="header-note">Tu próxima partida empieza aquí</span>
   </header>
-  <main class="game-page">
+
+  <main class="game-page expedition-page">
     <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> Volver a los juegos</a>
-    <p class="eyebrow">PRIMER ESPACIO</p>
-    <h1>Juego 1</h1>
-    <section class="game-stage" aria-label="Área de juego">
-      <div class="stage-message">
-        <span class="stage-symbol" aria-hidden="true">＋</span>
-        <h2>Tu juego empieza aquí</h2>
-        <p>Agrega la estructura de tu juego en este archivo y personaliza <code>game.css</code> y <code>game.js</code>.</p>
+
+    <section class="expedition-heading" aria-labelledby="game-title">
+      <div>
+        <p class="eyebrow">RPG DE EXPLORACIÓN · JUEGO 1</p>
+        <h1 id="game-title">Lumbre <span>del Valle</span></h1>
+        <p class="expedition-subtitle">Sigue las luciérnagas, mejora tu equipo y descubre qué despierta bajo las raíces.</p>
+      </div>
+      <div class="heading-actions">
+        <button class="quiet-button" id="reset-game" type="button">Reiniciar aventura</button>
       </div>
     </section>
+
+    <div class="game-layout">
+      <section class="adventure-panel" aria-label="Expedición">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">ZONA ACTUAL</p>
+            <h2 id="zone-name">Pradera de Ámbar</h2>
+            <p class="world-mix" id="world-mix">Bosque de Ámbar · Ruinas antiguas</p>
+          </div>
+          <div class="game-screen-controls">
+            <div class="panel-badges">
+              <span class="mode-pill" id="mode-indicator">AVENTURERO</span>
+              <span class="enemy-tag" id="enemy-tag">CRIATURA</span>
+            </div>
+            <div class="screen-actions">
+              <button class="quiet-button inventory-open" id="inventory-open" type="button">Inventario <span class="inventory-count" id="inventory-count">0</span></button>
+              <button class="quiet-button" id="guide-open" type="button">Cómo jugar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="landscape-scene" id="landscape-scene" data-biome="forest" data-secondary="dungeon" data-variant="0" aria-label="Escena de aventura">
+          <span class="scene-moon" aria-hidden="true"></span>
+          <span class="scene-star scene-star--one" aria-hidden="true">✦</span>
+          <span class="scene-star scene-star--two" aria-hidden="true">✧</span>
+          <div class="scene-ridges" aria-hidden="true">
+            <span class="scene-ridge scene-ridge--far"></span>
+            <span class="scene-ridge scene-ridge--near"></span>
+          </div>
+          <span class="scene-hill scene-hill--far" aria-hidden="true"></span>
+          <span class="scene-hill scene-hill--near" aria-hidden="true"></span>
+          <div class="world-props" id="world-props" aria-hidden="true"></div>
+
+          <div class="duel">
+            <div class="traveler" id="traveler" aria-label="Lía, exploradora">
+              <span class="traveler-lantern" aria-hidden="true">✦</span>
+              <span class="traveler-hood" aria-hidden="true"></span>
+              <span class="traveler-cape" aria-hidden="true"></span>
+              <span class="traveler-body" aria-hidden="true"></span>
+              <img class="traveler-armor" id="armor-design-in-scene" alt="" hidden>
+              <span class="traveler-head" aria-hidden="true"></span>
+              <span class="traveler-satchel" aria-hidden="true"></span>
+              <span class="traveler-weapon" aria-hidden="true"></span>
+            </div>
+            <span class="duel-spark" aria-hidden="true">✧</span>
+            <div class="creature" id="creature" role="img" aria-label="Enemigo">
+              <span class="monster-silhouette" aria-hidden="true">
+                <span class="monster-aura"></span>
+                <span class="monster-crown"></span>
+                <span class="monster-arm monster-arm--left"></span>
+                <span class="monster-arm monster-arm--right"></span>
+                <span class="monster-head"><span class="monster-eyes"></span></span>
+                <span class="monster-torso"><span class="monster-mark"></span></span>
+                <span class="monster-leg monster-leg--left"></span>
+                <span class="monster-leg monster-leg--right"></span>
+                <span class="monster-weapon"></span>
+                <span class="monster-tail"></span>
+              </span>
+            </div>
+          </div>
+          <p class="scene-caption" id="scene-caption">La bruma se abre a tu paso.</p>
+        </div>
+
+        <div class="combat-bars">
+          <div class="health-row">
+            <div class="bar-label"><span id="hero-name">Lía</span><span id="hero-hp-label">100 / 100</span></div>
+            <div class="meter"><span class="meter-fill meter-fill--hero" id="hero-health"></span></div>
+          </div>
+          <div class="health-row">
+            <div class="bar-label"><span id="enemy-name">Brote feral</span><span id="enemy-hp-label">28 / 28</span></div>
+            <div class="meter"><span class="meter-fill meter-fill--enemy" id="enemy-health"></span></div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="primary-action" id="expedition-toggle" type="button">Comenzar expedición</button>
+          <button class="secondary-action" id="heal-button" type="button">Brebaje de savia <span id="potion-cost">· 15 ◈</span></button>
+          <button class="strong-action" id="strong-attack-button" type="button" disabled aria-describedby="strong-attack-hint">
+            <span class="strong-action-icon" aria-hidden="true">✦</span>
+            <span class="strong-action-copy">
+              <strong id="strong-attack-label">Ataque fuerte</strong>
+              <small id="strong-attack-hint">2.2x daño · disponible durante el combate</small>
+            </span>
+          </button>
+        </div>
+
+      </section>
+
+      <section class="lower-dashboard" aria-label="Información de la aventura">
+        <aside class="side-column" aria-label="Personaje y equipo">
+        <section class="character-panel">
+          <div class="character-heading">
+            <div class="portrait" aria-hidden="true"><span>✦</span></div>
+            <div>
+              <p class="panel-kicker" id="hero-role">EXPLORADORA</p>
+              <h2 id="character-name">Lía</h2>
+            </div>
+            <span class="level-badge">NV. <span id="hero-level">1</span></span>
+          </div>
+          <form class="name-editor" id="character-name-form">
+            <label for="character-name-input">Nombre del personaje</label>
+            <div class="name-editor-row">
+              <input id="character-name-input" name="character-name" type="text" maxlength="18" value="Lía" autocomplete="off" required>
+              <button class="name-save-button" type="submit">Guardar</button>
+            </div>
+            <span class="name-status" id="character-name-status" role="status" aria-live="polite"></span>
+          </form>
+          <div class="xp-heading"><span>Experiencia</span><span id="xp-label">0 / 40</span></div>
+          <div class="meter meter--xp"><span class="meter-fill meter-fill--xp" id="xp-meter"></span></div>
+          <div class="resource-grid">
+            <div class="resource"><span class="resource-icon resource-icon--coin" aria-hidden="true">◈</span><span><strong id="coin-count">20</strong><small>Ámbares</small></span></div>
+            <div class="resource"><span class="resource-icon resource-icon--essence" aria-hidden="true">✧</span><span><strong id="essence-count">0</strong><small>Esencias</small></span></div>
+          </div>
+          <div class="stat-grid">
+            <div><span>Fuerza</span><strong id="attack-stat">12</strong></div>
+            <div><span>Armadura</span><strong id="armor-stat">0</strong></div>
+            <div><span>Encuentros</span><strong id="kill-count">0</strong></div>
+          </div>
+        </section>
+
+        <section class="equipment-panel" aria-labelledby="equipment-title">
+          <div class="panel-section-heading">
+            <div><p class="panel-kicker">TALLER DE CAMPO</p><h2 id="equipment-title">Equipo</h2></div>
+          </div>
+          <article class="upgrade-card">
+            <div class="upgrade-icon upgrade-icon--blade" aria-hidden="true">⚔</div>
+            <div class="upgrade-copy"><h3>Hoja de fresno</h3><p>Nivel <span id="weapon-level">0</span> · +3 fuerza</p></div>
+            <button class="upgrade-button" id="weapon-upgrade" type="button">Mejorar <span id="weapon-cost">25 ◈</span></button>
+          </article>
+          <article class="upgrade-card">
+            <div class="upgrade-icon upgrade-icon--cloak" aria-hidden="true">◇</div>
+            <div class="upgrade-copy"><h3>Capa de corteza</h3><p>Nivel <span id="armor-level">0</span> · +2 armadura</p></div>
+            <button class="upgrade-button" id="armor-upgrade" type="button">Mejorar <span id="armor-cost">22 ◈</span></button>
+          </article>
+        </section>
+
+        <section class="route-panel" aria-labelledby="route-title">
+          <div class="panel-section-heading">
+            <div><p class="panel-kicker">CAMINOS DESCUBIERTOS</p><h2 id="route-title">Mapa del valle</h2></div>
+          </div>
+          <div class="route-list" id="route-list">
+            <button class="route-button" type="button" data-zone="0">
+              <span class="route-marker" aria-hidden="true">01</span><span class="route-copy"><strong>Pradera de Ámbar</strong><small>Entre hierbas doradas</small></span><span class="route-state" aria-hidden="true">●</span>
+            </button>
+            <button class="route-button" type="button" data-zone="1" data-required-level="3">
+              <span class="route-marker" aria-hidden="true">02</span><span class="route-copy"><strong>Laguna de Vidrio</strong><small>Se abre en nivel 3</small></span><span class="route-state" aria-hidden="true">⌑</span>
+            </button>
+            <button class="route-button" type="button" data-zone="2" data-required-level="5">
+              <span class="route-marker" aria-hidden="true">03</span><span class="route-copy"><strong>Ruinas Celestes</strong><small>Se abre en nivel 5</small></span><span class="route-state" aria-hidden="true">⌑</span>
+            </button>
+          </div>
+        </section>
+        </aside>
+
+        <section class="journal lower-info-panel" aria-labelledby="journal-title">
+          <div class="journal-heading">
+            <h3 id="journal-title">Diario de ruta</h3>
+            <span class="live-indicator"><span aria-hidden="true"></span> EN VIVO</span>
+          </div>
+          <ol class="journal-list" id="journal-list" aria-live="polite" aria-relevant="additions"></ol>
+        </section>
+      </section>
+    </div>
+
+    <div class="save-status" id="save-status" role="status" aria-live="polite">Progreso guardado en este dispositivo</div>
+
+    <details class="credits-panel">
+      <summary>Créditos y nota del proyecto</summary>
+      <p><strong>Lumbre del Valle</strong> es una creación original para Speed games. Su código, mundo, personajes, textos e interfaz se han creado para este proyecto. Stone Story RPG se reconoce únicamente como la referencia mencionada por el equipo; este juego no está afiliado a sus creadores ni utiliza sus recursos.</p>
+    </details>
   </main>
+
+  <dialog class="guide-dialog" id="guide-dialog" aria-labelledby="guide-title">
+    <div class="guide-card">
+      <div class="guide-topline">
+        <p class="panel-kicker">LUMBRE DEL VALLE · GUÍA DE JUEGO</p>
+        <button class="guide-close" id="guide-close" type="button" aria-label="Cerrar guía" hidden>×</button>
+      </div>
+      <h2 id="guide-title">Antes de empezar</h2>
+      <p class="guide-intro" id="guide-intro">Acompaña a Lía por el valle: explora, combate y mejora su equipo.</p>
+
+      <section class="hero-picker" aria-labelledby="hero-picker-title">
+        <div class="hero-picker-heading">
+          <div>
+            <p class="panel-kicker">TU VIAJERO</p>
+            <h3 id="hero-picker-title">Elige tu forma de explorar</h3>
+          </div>
+          <label class="hero-color-picker" for="hero-color-picker">
+            Color principal
+            <input id="hero-color-picker" type="color" value="#d59663">
+          </label>
+        </div>
+        <div class="hero-options">
+          <label class="hero-option">
+            <input type="radio" name="hero-style" value="scout" checked>
+            <span class="hero-preview hero-preview--scout" aria-hidden="true">
+              <span class="preview-cape"></span><span class="preview-body"></span>
+              <span class="preview-head"></span><span class="preview-gear"></span>
+            </span>
+            <span class="hero-option-copy"><strong>Exploradora</strong><small>Ligera y veloz</small></span>
+          </label>
+          <label class="hero-option">
+            <input type="radio" name="hero-style" value="arcanist">
+            <span class="hero-preview hero-preview--arcanist" aria-hidden="true">
+              <span class="preview-cape"></span><span class="preview-body"></span>
+              <span class="preview-head"></span><span class="preview-gear"></span>
+            </span>
+            <span class="hero-option-copy"><strong>Arcanista</strong><small>Teje magia antigua</small></span>
+          </label>
+          <label class="hero-option">
+            <input type="radio" name="hero-style" value="warden">
+            <span class="hero-preview hero-preview--warden" aria-hidden="true">
+              <span class="preview-cape"></span><span class="preview-body"></span>
+              <span class="preview-head"></span><span class="preview-gear"></span>
+            </span>
+            <span class="hero-option-copy"><strong>Guardiana</strong><small>Firme como la roca</small></span>
+          </label>
+        </div>
+      </section>
+
+      <div class="guide-grid">
+        <section class="guide-section" aria-labelledby="guide-how-title">
+          <h3 id="guide-how-title">Cómo se juega</h3>
+          <ol class="guide-steps">
+            <li><span><strong>Explora.</strong> Inicia la expedición y tu personaje luchará automáticamente. Puedes detenerla cuando quieras.</span></li>
+            <li><span><strong>Descubre.</strong> Cada ruta mezcla biomas de forma procedural; avanza para generar regiones nuevas sin fin.</span></li>
+            <li><span><strong>Prepárate.</strong> Recoge materiales, fabrica equipo y mejora tu personaje. Cada quinto encuentro trae un guardián.</span></li>
+            <li><span><strong>Golpe decisivo.</strong> Durante la expedición usa Ataque fuerte; un arma con runa puede resonar y potenciarlo de forma poco frecuente.</span></li>
+          </ol>
+        </section>
+        <section class="guide-section" aria-labelledby="guide-controls-title">
+          <h3 id="guide-controls-title">Controles</h3>
+          <dl class="control-list">
+            <div><dt><kbd>Espacio</kbd></dt><dd>Iniciar o detener la expedición</dd></div>
+            <div><dt><kbd>H</kbd></dt><dd>Usar un brebaje de salud</dd></div>
+            <div><dt><kbd>W</kbd> <kbd>A</kbd></dt><dd>Mejorar hoja o armadura</dd></div>
+            <div><dt><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></dt><dd>Viajar a una ruta desbloqueada</dd></div>
+            <div><dt><kbd>I</kbd></dt><dd>Abrir el inventario y el taller</dd></div>
+          </dl>
+          <p class="guide-hint">También puedes usar los botones de la pantalla. Las teclas no funcionan mientras esta guía está abierta.</p>
+        </section>
+      </div>
+
+      <fieldset class="difficulty-options">
+        <legend>Elige tu dificultad</legend>
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="calm">
+          <span class="difficulty-copy"><strong>Tranquilo</strong><small>Los enemigos hacen menos daño. Ideal para explorar sin apuro.</small></span>
+        </label>
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="standard" checked>
+          <span class="difficulty-copy"><strong>Aventurero</strong><small>El desafío y las recompensas mantienen su equilibrio original.</small></span>
+        </label>
+        <label class="difficulty-card">
+          <input type="radio" name="difficulty" value="challenge">
+          <span class="difficulty-copy"><strong>Intenso</strong><small>Los enemigos golpean más fuerte, pero entregan más experiencia y ámbares.</small></span>
+        </label>
+      </fieldset>
+
+      <div class="guide-actions">
+        <p id="guide-footnote">Puedes cambiar la dificultad más adelante desde «Cómo jugar».</p>
+        <button class="primary-action" id="guide-continue" type="button">Guardar ajustes y comenzar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="inventory-dialog" id="inventory-dialog" aria-labelledby="inventory-title">
+    <div class="inventory-shell">
+      <div class="inventory-header">
+        <div>
+          <p class="panel-kicker">MOCHILA Y TALLER</p>
+          <h2 id="inventory-title">Inventario de <span id="inventory-character-name">Lía</span></h2>
+          <p>Los objetos se guardan automáticamente. Abrir el inventario pausa la expedición.</p>
+        </div>
+        <button class="guide-close" id="inventory-close" type="button" aria-label="Cerrar inventario">×</button>
+      </div>
+
+      <section class="inventory-materials" aria-labelledby="materials-title">
+        <div class="inventory-section-heading">
+          <div><p class="panel-kicker">RECURSOS RECOGIDOS</p><h3 id="materials-title">Materiales</h3></div>
+          <span class="inventory-hint">Caen al derrotar criaturas</span>
+        </div>
+        <div class="material-grid">
+          <div class="material-card"><span class="material-icon material-icon--branch" aria-hidden="true">♧</span><span><strong>Ramas</strong><small>Para mangos y protecciones</small></span><b id="branch-count">0</b></div>
+          <div class="material-card"><span class="material-icon material-icon--stone" aria-hidden="true">⬟</span><span><strong>Rocas</strong><small>Para filos y refuerzos</small></span><b id="stone-count">0</b></div>
+          <div class="material-card"><span class="material-icon material-icon--metal" aria-hidden="true">◈</span><span><strong>Metal</strong><small>Para equipo de forja</small></span><b id="metal-count">0</b></div>
+          <div class="material-card"><span class="material-icon material-icon--rune" aria-hidden="true">✧</span><span><strong>Runas</strong><small>Muy raras; potencian equipo</small></span><b id="rune-count">0</b></div>
+        </div>
+      </section>
+
+      <section class="inventory-crafting" aria-labelledby="crafting-title">
+        <div class="inventory-section-heading">
+          <div><p class="panel-kicker">RECETAS</p><h3 id="crafting-title">Forjar equipo</h3></div>
+        </div>
+        <div class="recipe-grid" id="recipe-list"></div>
+      </section>
+
+      <section class="inventory-gear" aria-labelledby="gear-title">
+        <div class="inventory-section-heading">
+          <div><p class="panel-kicker">EQUIPO CREADO</p><h3 id="gear-title">Tu equipo</h3></div>
+        </div>
+        <div class="gear-inventory-grid">
+          <section class="gear-list-panel" aria-labelledby="weapons-title">
+            <h4 id="weapons-title">Armas</h4>
+            <div class="inventory-items" id="weapon-items"></div>
+            <button class="rune-button" id="rune-weapon" type="button">Engarzar runa en el arma equipada</button>
+          </section>
+          <section class="gear-list-panel" aria-labelledby="armors-title">
+            <h4 id="armors-title">Armaduras</h4>
+            <div class="inventory-items" id="armor-items"></div>
+            <button class="rune-button" id="rune-armor" type="button">Engarzar runa en la armadura equipada</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="design-panel" aria-labelledby="design-title">
+        <div class="inventory-section-heading">
+          <div><p class="panel-kicker">DISEÑO PERSONAL</p><h3 id="design-title">Dibuja tu armadura</h3></div>
+        </div>
+        <p class="design-description">Arrastra el ratón o el dedo sobre la silueta para dibujar. Elige color y grosor, usa el borrador si lo necesitas y guarda para ver el diseño en la exploradora.</p>
+        <div class="design-tools">
+          <label class="color-tool">Color <input id="design-color" type="color" value="#f6d58d"></label>
+          <label class="size-tool">Pincel <input id="design-size" type="range" min="2" max="22" value="8"><span id="design-size-label">8</span></label>
+          <button class="design-tool-button" id="design-eraser" type="button" aria-pressed="false">Borrador</button>
+          <button class="design-tool-button" id="design-clear" type="button">Limpiar</button>
+        </div>
+        <div class="design-canvas-wrap">
+          <canvas id="armor-design-canvas" width="320" height="200" aria-label="Lienzo para dibujar el diseño de la armadura"></canvas>
+        </div>
+        <div class="design-footer">
+          <span id="design-status" role="status" aria-live="polite">Tu diseño aparecerá sobre la armadura equipada.</span>
+          <button class="primary-action" id="design-save" type="button">Guardar diseño</button>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
   <footer class="site-footer">
     <span>Speed games</span>
     <span>Hecho para jugar en equipo <span aria-hidden="true">✳</span></span>

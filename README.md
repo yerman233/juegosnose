@@ -10,6 +10,12 @@ Sitio web estático con una portada y tres espacios independientes para juegos.
 
 ## Agregar un juego
 
-Abre el `index.html` de la carpeta correspondiente y reemplaza el contenido de ejemplo dentro de `Área de juego`. Usa `game.css` y `game.js` para los estilos y la lógica, y guarda imágenes o sonidos en `assets/`. Para cambiar los nombres visibles, actualiza el título y el enlace correspondiente en el `index.html` principal.
+El Juego 1 contiene **Lumbre del Valle**, un RPG original con guía inicial, controles de teclado, tres dificultades, combate automático, inventario, fabricación de equipo y mundos procedurales sin fin. Cada región mezcla dos biomas (bosques, catacumbas, desiertos, abismos marinos y ruinas), con criaturas humanoides acordes al entorno. Antes de empezar puedes elegir entre tres estilos de personaje y cambiar su color principal. Los ataques del personaje y los enemigos tienen animaciones; el botón de Ataque fuerte inflige 2.2 veces el daño normal y puede resonar con un arma rúnica con un 12% de probabilidad. A partir del tercer mundo aumentan la salud y el daño de los enemigos. El juego usa una paleta apagada de grises y azules; los enemigos dejan materiales y runas raras, y el progreso se guarda localmente. Su mundo, personajes, interfaz y código son propios; no está afiliado a otros juegos ni usa sus recursos.
+
+En Lumbre, usa `Espacio` para iniciar o detener la expedición, el botón de Ataque fuerte para ejecutar un golpe especial (con 6 segundos de recarga), `H` para beber una poción, `W`/`A` para mejorar equipo, `I` para abrir el inventario y `1`–`3` para viajar a rutas desbloqueadas. Abre «Cómo jugar» dentro del juego para consultar las instrucciones y cambiar dificultad.
+
+La pantalla de combate muestra al personaje, su armadura, los escenarios combinados y las barras de salud. La información del personaje, su nombre editable, el equipo y las rutas aparecen debajo.
+
+Para modificar Lumbre, edita `juegos/juego-1/index.html`, `game.css` y `game.js`; guarda cualquier recurso original nuevo en su carpeta `assets/`. Para los Juegos 2 y 3, reemplaza el contenido de ejemplo en su `index.html` y personaliza sus archivos correspondientes.
 
 Abre `index.html` en un navegador para usar el sitio; no se necesita instalar dependencias.
